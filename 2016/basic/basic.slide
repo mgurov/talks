@@ -112,11 +112,11 @@ A struct can embed other structs "borrowing" the state and behavior of the embed
 
 .play -edit embedding_sample.go
 
-* Exercise: Graphic
+* Exercise: Shape
 
 Define types to model Rectangle,Circle and Point and use struct embedding.
 
-* Solution: Graphic
+* Solution: Shape
 
 .play -edit embedding.go  /START OMIT/,/END OMIT/
 
@@ -240,12 +240,6 @@ Create a thread-safe implementation of a map
 
 .play -edit locking2.go /START OMIT/,/END OMIT/
 
-
-* Simple HTTP server
-
-.link http://go-talks.appspot.com/github.com/emicklei/talks/2014/bolwork/case.slide#3 2014 talk
-
-.image img/with_champagne.jpg _ 300
 
 * Function as value
 	
