@@ -103,6 +103,14 @@ Receives values from the channel repeatedly until it is closed.
 
 Write a program that computes 10 factorial numbers, each number in a different goroutine
 
+    func fac(i int) int {
+        if i == 1 {
+        	return 1
+        } else {
+        	return i * fac(i-1)
+        }
+    }
+
 * Solution
 
 .play -edit concurrent_factorial.go   /START OMIT/,/END OMIT/ 
