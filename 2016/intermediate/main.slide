@@ -87,7 +87,7 @@ Receivers can test whether a channel has been closed
 
 Receives values from the channel repeatedly until it is closed.
 
- 	for each := range myChan {
+	for each := range myChan {
 		...
 	}
 
