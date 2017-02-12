@@ -16,6 +16,12 @@ func main() {
 	}
 	go consume(result)
 	wg.Wait()
+	close(result)
+}
+
+func produce(i int, c chan int, wg *sync.WaitGroup) {
+	c <- fac(i)
+	wg.Done()
 }
 
 func consume(result chan int) {
@@ -24,10 +30,6 @@ func consume(result chan int) {
 	}
 }
 
-func produce(i int, c chan int, wg *sync.WaitGroup) {
-	c <- fac(i)
-	wg.Done()
-}
 // END OMIT
 
 func fac(i int) int {

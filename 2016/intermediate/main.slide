@@ -115,6 +115,10 @@ Write a program that computes 10 factorial numbers, each number in a different g
 
 .play -edit concurrent_factorial.go   /START OMIT/,/END OMIT/ 
 
+* Solution producer/consumer style with WaitGroup
+
+.play -edit concurrent_factorial_consumer.go   /START OMIT/,/END OMIT/
+
 
 
 
