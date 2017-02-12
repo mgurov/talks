@@ -5,17 +5,6 @@ import (
 )
 
 // START OMIT
-func fac(i int) int {
-	if i == 1 {
-		return 1
-	} else {
-		return i * fac(i-1)
-	}
-}
-
-func compute(i int, c chan int) {
-	c <- fac(i)
-}
 
 func main() {
 	result := make(chan int, 10)
@@ -27,5 +16,18 @@ func main() {
 	}
 	close(result)
 }
+
+func compute(i int, c chan int) {
+	c <- fac(i)
+}
+
+func fac(i int) int {
+	if i == 1 {
+		return 1
+	} else {
+		return i * fac(i-1)
+	}
+}
+
 
 // END OMIT
