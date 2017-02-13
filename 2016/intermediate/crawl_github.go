@@ -22,12 +22,11 @@ type Repository struct {
 	TagsUrl string `json:"tags_url"`
 }
 
-func getRepos(user string) (list []Repository, err error) {
-	reposUrl := fmt.Sprintf("https://api.github.com/users/%s/repos", user)
+func getJson(url string, v interface{}) error {
 
-	req, err := http.NewRequest("GET", reposUrl, nil)
+	req, err := http.NewRequest("GET", url, nil)
 	if nil != err {
-		return
+		return err
 	}
 
 	if os.Getenv("USER") != "" && os.Getenv("GITHUB_TOKEN") != "" {
@@ -36,15 +35,23 @@ func getRepos(user string) (list []Repository, err error) {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return
+		return err
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
 		responseBody, _ := ioutil.ReadAll(resp.Body)
-		err = errors.New(fmt.Sprintf("Unexpected http response code %d response %s", resp.StatusCode, responseBody))
-		return
+		return errors.New(fmt.Sprintf(
+			"Unexpected http response code %d url %s response %s",
+			resp.StatusCode,
+			url,
+			responseBody))
 	}
-	json.NewDecoder(resp.Body).Decode(&list)
+	return json.NewDecoder(resp.Body).Decode(v)
+}
+
+func getRepos(user string) (list []Repository, err error) {
+	reposUrl := fmt.Sprintf("https://api.github.com/users/%s/repos", user)
+	err = getJson(reposUrl, &list);
 	return
 }
 
@@ -57,14 +64,7 @@ type Tag struct {
 }
 
 func getTagsForRepo(url string) (list []Tag, err error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return
-	}
-	if resp.Body != nil {
-		defer resp.Body.Close()
-	}
-	json.NewDecoder(resp.Body).Decode(&list)
+	err = getJson(url, &list);
 	return
 }
 
