@@ -8,17 +8,20 @@ import (
 
 // START OMIT
 func main() {
-	err := doSomething("demo")
-	println(tre.New(err, "doSomething failed").Error())
+	if err := doSomething("demo"); err != nil {
+		println(tre.New(err, "doSomething failed").Error())
+	}
 }
 
 func doSomething(with string) error {
-	err := doAnotherThingThatCanFail(with)
-	return tre.New(err, "doAnotherThingThatCanFail failed", "with", with) // pass error, message and context
+	if err := somethingFaulty(with); err != nil {
+		return tre.New(err, "somethingFaulty failed", "with", with) // pass error, message and context
+	}
+	return nil
 }
 
-func doAnotherThingThatCanFail(with string) error {
-	return errors.New("something bad happened")
+func somethingFaulty(_ string) error {
+	return errors.New("something bad has just happened")
 }
 
 // END OMIT
