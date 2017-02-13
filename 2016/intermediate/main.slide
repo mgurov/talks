@@ -257,6 +257,12 @@ Write a copy program that reads the contents of one file and writes it to anothe
 
 Concurrency fetch all tags of all public github repositories of a given user (e.g. bolcom)
 
+https://api.github.com/users/bolcom/repos
+
+https://api.github.com/repos/bolcom/kibana/tags
+
+https://developer.github.com/v3/
+
 * Get repositories for user
 
 .code crawl_github.go  /START OMIT/,/END OMIT/ 
