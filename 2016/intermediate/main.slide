@@ -249,10 +249,7 @@ Write a copy program that reads the contents of one file and writes it to anothe
 
 * Solution (part 2)
 
-.code copy.go   /START OMIT/,/END OMIT/ 
-
-
-	
+.code copy.go   /START OMIT/,/END OMIT/
 
 	
 	
