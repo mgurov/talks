@@ -215,7 +215,7 @@ Always check the error
 .code custom_error_handling.go /START OMIT/,/END OMIT/ 
 	
 	
-* TracingError
+* package github.com/emicklei/tre
 
 	type TracingError struct {
 		cause     error
@@ -229,10 +229,7 @@ Collects stack information and logging context.
 	
 * Using TracingError
 
-.play -edit tracing_error.go  /START OMIT/,/END OMIT/ 
-
-package github.com/emicklei/tre
-
+.play -edit tracing_error.go  /START OMIT/,/END OMIT/
 
 * Problem
 
