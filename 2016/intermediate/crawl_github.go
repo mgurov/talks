@@ -17,22 +17,14 @@ import (
 // https://api.github.com/repos/bolcom/kibana/tags
 
 // START OMIT
-type Repository struct {
-	Name    string `json:"name"`
-	TagsUrl string `json:"tags_url"`
-}
-
 func getJson(url string, v interface{}) error {
-
 	req, err := http.NewRequest("GET", url, nil)
 	if nil != err {
 		return err
 	}
-
 	if os.Getenv("USER") != "" && os.Getenv("GITHUB_TOKEN") != "" {
 		req.SetBasicAuth(os.Getenv("USER"), os.Getenv("GITHUB_TOKEN"))
 	}
-
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
@@ -42,11 +34,18 @@ func getJson(url string, v interface{}) error {
 		responseBody, _ := ioutil.ReadAll(resp.Body)
 		return errors.New(fmt.Sprintf(
 			"Unexpected http response code %d url %s response %s",
-			resp.StatusCode,
-			url,
-			responseBody))
+			resp.StatusCode, url, responseBody))
 	}
 	return json.NewDecoder(resp.Body).Decode(v)
+}
+
+// END OMIT
+
+// START OMIT2
+
+type Repository struct {
+	Name    string `json:"name"`
+	TagsUrl string `json:"tags_url"`
 }
 
 func getRepos(user string) (list []Repository, err error) {
@@ -54,10 +53,6 @@ func getRepos(user string) (list []Repository, err error) {
 	err = getJson(reposUrl, &list);
 	return
 }
-
-// END OMIT
-
-// START OMIT2
 
 type Tag struct {
 	Name string `json:"name"`
@@ -78,7 +73,7 @@ func main() {
 		log.Fatalln(err)
 	}
 	if len(repos) == 0 {
-		log.Println("no repos for this user (or did you hit the rate limitter?)")
+		log.Println("no repos for this user")
 	}
 	for _, each := range repos {
 		if list, err := getTagsForRepo(each.TagsUrl); err != nil {
