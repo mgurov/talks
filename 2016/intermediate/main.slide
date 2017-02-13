@@ -168,13 +168,16 @@ The error built-in interface type is the conventional interface for representing
 
 Use "err" to name an error
 
-	if err := os.Open("future"); err != nil {
+	if file, err := os.Open("future"); err != nil {
 		log.Fatal("cannot read the future", err)
+	} else {
+	    defer file.Close()
+	    ...
 	}
 
 Put error return type at the end
 
-	func FetchOrderHistory(account Account) ([]Order, error ) {...}
+	func FetchOrderHistory(account Account) ([]Order, error) {...}
 
 Always check the error
 
