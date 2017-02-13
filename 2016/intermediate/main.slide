@@ -18,19 +18,11 @@ Software Artist
 
 - goroutines and channels
 - working with http and JSON
-- error handling , logging
-- vendoring (if time permitted)
+- error handling, logging
 
 .image img/dubai.png _ 300
 
-	
-* Format per Topic
 
-- Theory or Example
-- Excercise
-- Solution
-
-.image img/triplet.jpg _ 300
 * Goroutines and Channels
 
 .image img/sayhi.jpg
