@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"errors"
+	"io/ioutil"
 )
 
 // repos
@@ -24,8 +26,11 @@ func getRepos(user string) (list []Repository, err error) {
 	if err != nil {
 		return
 	}
-	if resp.Body != nil {
-		defer resp.Body.Close()
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		responseBody, _ := ioutil.ReadAll(resp.Body)
+		err = errors.New(fmt.Sprintf("Unexpected http response code %d response %s", resp.StatusCode, responseBody))
+		return
 	}
 	json.NewDecoder(resp.Body).Decode(&list)
 	return
