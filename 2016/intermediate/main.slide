@@ -177,7 +177,7 @@ The error built-in interface type is the conventional interface for representing
 Use "err" to name an error
 
 	if err := os.Open("future"); err != nil {
-		log.Fatal("cannot read the future",err)
+		log.Fatal("cannot read the future", err)
 	}
 
 Put error return type at the end
