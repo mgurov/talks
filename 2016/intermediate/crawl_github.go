@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"errors"
 	"io/ioutil"
+	"os"
 )
 
 // repos
@@ -22,7 +23,18 @@ type Repository struct {
 }
 
 func getRepos(user string) (list []Repository, err error) {
-	resp, err := http.Get(fmt.Sprintf("https://api.github.com/users/%s/repos", user))
+	reposUrl := fmt.Sprintf("https://api.github.com/users/%s/repos", user)
+
+	req, err := http.NewRequest("GET", reposUrl, nil)
+	if nil != err {
+		return
+	}
+
+	if os.Getenv("USER") != "" && os.Getenv("GITHUB_TOKEN") != "" {
+		req.SetBasicAuth(os.Getenv("USER"), os.Getenv("GITHUB_TOKEN"))
+	}
+
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return
 	}
