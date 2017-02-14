@@ -4,6 +4,8 @@ Ernest Micklei
 Software Artist
 *golangmasters.com*
 
+presented by Mykola Gurov.
+
 * Who am i
 
 - using Go since 2011
@@ -255,7 +257,7 @@ Write a copy program that reads the contents of one file and writes it to anothe
 	
 * Problem
 
-Concurrency fetch all tags of all public github repositories of a given user (e.g. bolcom)
+Fetch all tags of all public github repositories of a given user (e.g. bolcom)
 
 https://api.github.com/users/bolcom/repos
 
